@@ -1,3 +1,11 @@
+# InPlay Preamble
+
+Building custom libraries, namely geos and proj, is a pain on Heroku. You only have access to compile tools during slug compilation, not at runtime, so it's hard to debug library compilation issues. So, we try not to upgrade these packages unless strictly necessary. While 3rd party package maintainers for these have existed, ex. https://github.com/cyberdelia/heroku-geo-buildpack (archived & no longer maintained), we've had issues when either they upgrade or we need to upgrade and they haven't.
+
+So, this is our fork of a project that compiles these packages at slug compilation time, then makes them publically accessible for download. Although we could just let the app serve them for future deploys, for cost savings we then move the compiled binaries to rackspace. THEN our main inplay repo pulls those precompiled binaries to be available for linking by rgeo when the main repo slug gets compiled.
+
+Sort of a rude goldberg machine, but hopefully it works better than other methods we've used.
+
 # Vesuvius, a Vulcan replacement
 [![Donate once-off to this project using Bitcoin](https://img.shields.io/badge/bitcoin-donate-blue.svg)](bitcoin:1L6sqoG8xXhYziH9NGjPzgR1dEP2SbJrfM)
 
